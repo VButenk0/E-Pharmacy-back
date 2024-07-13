@@ -2,6 +2,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { findUser, setToken, signUp } from "../services/userServices.js";
+import ctrWrapper from "../decorators/ctrWrapper.js";
+import HttpError from "../helpers/HttpError.js";
 
 dotenv.config();
 

@@ -1,4 +1,4 @@
-import { getAllInfo } from "../services/dashboardServices";
+import { getAllInfo } from "../services/dashboardServices.js";
 import ctrWrapper from "../decorators/ctrWrapper.js";
 
 const getDashboardInfo = async (_, res) => {

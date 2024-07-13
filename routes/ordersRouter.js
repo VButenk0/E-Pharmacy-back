@@ -1,8 +1,8 @@
 import express from "express";
-import { getOrders } from "../controllers/ordersControllers.js";
+import ordersControllers from "../controllers/ordersControllers.js";
 
 const ordersRouter = express.Router();
 
-ordersRouter.get("/", getOrders);
+ordersRouter.get("/", ordersControllers.getAllOrders);
 
 export default ordersRouter;

@@ -1,11 +1,16 @@
 import express from "express";
 import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
 import userRouter from "./routes/userRouter.js";
 import dashboardRouter from "./routes/dashboardRouter.js";
 import ordersRouter from "./routes/ordersRouter.js";
 import productsRouter from "./routes/productsRouter.js";
 import suppliersRouter from "./routes/supplierRouter.js";
 import customersRouter from "./routes/customersRouter.js";
+
+dotenv.config();
 
 const app = express();
 
@@ -23,9 +28,19 @@ app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-app.use((err, _, res, next) => {
+app.use((err, req, res, next) => {
   const { status = 500, message = "Server error" } = err;
   res.status(status).json({ message });
 });
 
-app.listen(3000, () => console.log("Server is running on 3000 PORT"));
+const { DB_HOST, PORT = 4000 } = process.env;
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
+  })
+  .catch((err) => {
+    console.log(err.message);
+    process.exit(1);
+  });

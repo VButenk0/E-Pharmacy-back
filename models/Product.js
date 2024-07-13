@@ -1,13 +1,10 @@
 import { Schema, model } from "mongoose";
+import { handleSaveError, setUpdateSetting } from "./hooks.js";
 
 const productSchema = new Schema(
   {
-    id: {
-      type: Number,
-    },
     photo: {
       type: String,
-      required: true,
     },
     name: {
       type: String,
@@ -27,6 +24,15 @@ const productSchema = new Schema(
     },
     category: {
       type: String,
+      enum: [
+        "Medicine",
+        "Heart",
+        "Head",
+        "Hand",
+        "Leg",
+        "Skin Care",
+        "Dental Care",
+      ],
       required: true,
     },
   },
@@ -35,5 +41,9 @@ const productSchema = new Schema(
     timestamps: true,
   }
 );
+
+productSchema.post("save", handleSaveError);
+productSchema.pre("findOneAndUpdate", setUpdateSetting);
+productSchema.post("findOneAndUpdate", handleSaveError);
 
 export const Product = model("product", productSchema);

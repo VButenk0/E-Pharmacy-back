@@ -1,12 +1,10 @@
 import express from "express";
-import {
-  getAllCustomers,
-  getCustomerById,
-} from "../controllers/customersControllers.js";
+import customersControllers from "../controllers/customersControllers.js";
+import { isValidId } from "../middlewares/isValidId.js";
 
 const customersRouter = express.Router();
 
-customersRouter.get("/", getAllCustomers);
-customersRouter.put("/:supplierId", getCustomerById);
+customersRouter.get("/", customersControllers.getAllCustomers);
+customersRouter.get("/:id", isValidId, customersControllers.getCustomerById);
 
 export default customersRouter;

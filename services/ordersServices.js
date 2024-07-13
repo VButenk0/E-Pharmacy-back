@@ -1,3 +1,3 @@
-import { Order } from "../models/Order";
+import { Order } from "../models/Order.js";
 
 export const getOrders = async () => Order.find();

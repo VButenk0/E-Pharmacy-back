@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { handleSaveError, setUpdateSetting } from "./hooks.js";
 
 const supplierSchema = new Schema(
   {
@@ -20,6 +21,7 @@ const supplierSchema = new Schema(
     },
     amount: {
       type: String,
+      min: 1,
       required: true,
     },
     status: {
@@ -33,5 +35,9 @@ const supplierSchema = new Schema(
     timestamps: true,
   }
 );
+
+supplierSchema.post("save", handleSaveError);
+supplierSchema.pre("findOneAndUpdate", setUpdateSetting);
+supplierSchema.post("findOneAndUpdate", handleSaveError);
 
 export const Supplier = model("supplier", supplierSchema);

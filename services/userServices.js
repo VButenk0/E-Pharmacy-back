@@ -6,6 +6,10 @@ export const signUp = async (data) => {
   return User.create({ ...data, password: hashPassword });
 };
 
+export const findUserById = (id) => {
+  return User.findById(id);
+};
+
 export const findUser = (filter) => {
   return User.findOne(filter);
 };

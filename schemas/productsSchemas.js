@@ -1,16 +1,19 @@
 import Joi from "joi";
 
-export const createPortionSchema = Joi.object({
-  productInfo: Joi.string().required(),
+export const createProductSchema = Joi.object({
+  photo: Joi.string(),
+  name: Joi.string().required(),
   category: Joi.string().required(),
   stock: Joi.number().required(),
-  suppliers: Joi.number().required(),
+  suppliers: Joi.string().required(),
   price: Joi.string().required(),
 });
 
-export const updatePortionSchema = Joi.object({
-  amount: Joi.number(),
-  time: Joi.string(),
-  dailyNorma: Joi.number(),
-  consumeRatio: Joi.number(),
+export const updateProductSchema = Joi.object({
+  photo: Joi.string(),
+  name: Joi.string(),
+  category: Joi.string(),
+  stock: Joi.number(),
+  suppliers: Joi.string(),
+  price: Joi.string(),
 });

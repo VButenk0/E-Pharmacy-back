@@ -1,7 +1,7 @@
-import { Customer } from "../models/Customer";
-import { IncomeExpense } from "../models/IncomeExpense";
-import { Product } from "../models/Product";
-import { Supplier } from "../models/Supplier";
+import { Customer } from "../models/Customer.js";
+import { IncomeExpense } from "../models/IncomeExpense.js";
+import { Product } from "../models/Product.js";
+import { Supplier } from "../models/Supplier.js";
 
 export const getAllInfo = async () => {
   const products = Product.find();
