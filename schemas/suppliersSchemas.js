@@ -6,7 +6,7 @@ export const createSupplierSchema = Joi.object({
   suppliers: Joi.string().required(),
   date: Joi.string().required(),
   amount: Joi.string().required(),
-  status: Joi.string().required(),
+  status: Joi.string().valid("Active", "Deactive").required(),
 });
 
 export const updateSupplierSchema = Joi.object({
@@ -15,5 +15,5 @@ export const updateSupplierSchema = Joi.object({
   suppliers: Joi.string(),
   date: Joi.string(),
   amount: Joi.string(),
-  status: Joi.string(),
+  status: Joi.string().valid("Active", "Deactive"),
 });

@@ -22,4 +22,4 @@ const incomeExpenseSchema = new Schema(
   }
 );
 
-export const IncomeExpense = model("incomeExpense", incomeExpenseSchema);
+export const IncomeExpense = model("income-expense", incomeExpenseSchema);
