@@ -20,28 +20,19 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await findUser({ email });
 
-  if (user) {
-    const passwordCompare = await bcrypt.compare(password, user.password);
-    if (!passwordCompare) {
-      throw HttpError(401, "Invalid email or password");
-    }
-    const token = await sign(user);
-    res.json({
-      token,
-      user: {
-        name: user.email.split("@")[0],
-        email,
-      },
-    });
+  if (!user) {
+    throw HttpError(401, "Invalid email or password");
   }
 
-  const newUser = await signUp({ ...req.body });
-  const token = await sign(newUser);
-
-  res.status(201).json({
+  const passwordCompare = await bcrypt.compare(password, user.password);
+  if (!passwordCompare) {
+    throw HttpError(401, "Invalid email or password");
+  }
+  const token = await sign(user);
+  res.json({
     token,
-    name: newUser.email.split("@")[0],
-    email: newUser.email,
+    name: user.email.split("@")[0],
+    email,
   });
 };
 
@@ -52,6 +43,7 @@ const logout = async (req, res) => {
 };
 
 const getUserInfo = async (req, res) => {
+  console.log(req.user);
   const { name, email } = req.user;
   res.status(200).json({ name, email });
 };
