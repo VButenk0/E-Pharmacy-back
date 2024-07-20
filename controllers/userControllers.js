@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { findUser, setToken, signUp } from "../services/userServices.js";
-import ctrWrapper from "../decorators/ctrWrapper.js";
 import HttpError from "../helpers/HttpError.js";
+import ctrWrapper from "../decorators/ctrWrapper.js";
+import { findUser, setToken } from "../services/userServices.js";
 
 dotenv.config();
 
@@ -28,6 +28,7 @@ const login = async (req, res) => {
   if (!passwordCompare) {
     throw HttpError(401, "Invalid email or password");
   }
+
   const token = await sign(user);
   res.json({
     token,
